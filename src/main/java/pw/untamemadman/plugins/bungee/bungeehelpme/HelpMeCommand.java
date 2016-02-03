@@ -44,18 +44,18 @@ public class HelpMeCommand extends Command
 
                 //For every player on the BungeeCord
                 for (ProxiedPlayer receivers : ProxyServer.getInstance().getPlayers())
+            {
+                //If the player has the permission "helpme.see"
+                if (receivers.hasPermission("helpme.see"))
                 {
-                    //If the player has the permission "helpme.see"
-                    if (receivers.hasPermission("helpme.see"))
-                    {
-                        //They will receive the players cry for help
-                        receivers.sendMessage(ChatColor.translateAlternateColorCodes('&', Prefix + Server + PlayerName + Arguments));
-                    }
-                    else //If the player doesn't have permission do nothing
-                    {
-                        //NOOP
-                    }
+                    //They will receive the players cry for help
+                    receivers.sendMessage(ChatColor.translateAlternateColorCodes('&', Prefix + Server + PlayerName + Arguments));
                 }
+                else //If the player doesn't have permission do nothing
+                {
+                    //NOOP
+                }
+            }
             }
             else //If they player didn't use arguments
             {
