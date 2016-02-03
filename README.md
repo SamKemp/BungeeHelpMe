@@ -1,6 +1,7 @@
 # BungeeHelpMe 
 
 [![Build Status](https://travis-ci.org/untamemadman/BungeeHelpMe.svg?branch=master)](https://travis-ci.org/untamemadman/BungeeHelpMe)
+
 This simple BungeeCord plugin is designed for players and staff to easily communicate problems.
 This is my first BungeeCord Plugin and I know that it could have some more advanced features.
 
