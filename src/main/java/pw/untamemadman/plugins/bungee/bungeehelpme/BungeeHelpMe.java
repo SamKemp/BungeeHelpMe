@@ -10,27 +10,59 @@ import net.md_5.bungee.config.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 
 public class BungeeHelpMe extends Plugin
 {
     @Override
     public void onEnable()
     {
+        //Config handling
+        loadConfig();
+
+        //Command handling
         getProxy().getPluginManager().registerCommand(this, new HelpMeCommand("helpme"));
         getProxy().getPluginManager().registerCommand(this, new HelpReplyCommand("helpreply"));
-        loadConfig();
     }
 
     public void loadConfig()
     {
-        //Try to get the config file
+        if (!getDataFolder().exists())
+            getDataFolder().mkdir();
+
+        File file = new File(getDataFolder(), "helpme.log");
+
+        if(!file.exists())
+        {
+            try (InputStream in = getResourceAsStream("helpme.log"))
+            {
+                Files.copy(getResourceAsStream("helpme.log"), file.toPath());
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+        Configuration config = null;
+
         try
         {
-            Configuration configuration = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(getDataFolder(), "config.yml"));
+            config = ConfigurationProvider.getProvider(YamlConfiguration.class).load(new File(getDataFolder(), "helpme.log"));
         }
-        catch(IOException i) //Catch the error if the config file doesn't exist
+        catch(IOException e)
         {
+            e.printStackTrace();
+        }
+
+        try
+        {
+            ConfigurationProvider.getProvider(YamlConfiguration.class).save(config, new File(getDataFolder(), "helpme.log"));
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
         }
     }
-
 }

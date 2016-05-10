@@ -82,7 +82,7 @@ public class HelpReplyCommand extends Command
             {
                 //Tells the player to use arguments
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "Incorrect usage please use:"));
-                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "/replyme <name> <message>"));
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "/helpreply <name> <message>"));
             }
         }
     }

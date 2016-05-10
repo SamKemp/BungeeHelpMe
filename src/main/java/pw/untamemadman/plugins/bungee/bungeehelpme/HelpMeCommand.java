@@ -29,33 +29,39 @@ public class HelpMeCommand extends Command
             String Server = "&6[&a" + serverName + "&6] &f";
             String PlayerName = "&6[&5" + ((ProxiedPlayer) sender).getDisplayName().toString() + "&6] &f";
             String Arguments = "";
+            String Total = "";
 
             if (!(args.length == 0)) //if the player used arguments
             {
 
-                //loop threw all the arguments and save them to a string
-                for(int i = 0; i < args.length; i++){
+                //loop through all the arguments and save them to a string
+                for(int i = 0; i < args.length; i++)
+                {
                     String arg = args[i] + " ";
                     Arguments = Arguments + arg;
                 }
+
+                Total = ChatColor.translateAlternateColorCodes('&', Prefix + Server + PlayerName + Arguments);
+                config.getList("Log").add(Total);
+                BungeeHelpMe.class.
 
                 //Send a copy of the message to the player that typed the command.
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', Prefix + Server + PlayerName + Arguments));
 
                 //For every player on the BungeeCord
                 for (ProxiedPlayer receivers : ProxyServer.getInstance().getPlayers())
-            {
-                //If the player has the permission "helpme.see"
-                if (receivers.hasPermission("helpme.see"))
-                {
-                    //They will receive the players cry for help
-                    receivers.sendMessage(ChatColor.translateAlternateColorCodes('&', Prefix + Server + PlayerName + Arguments));
+                 {
+                    //If the player has the permission "helpme.see"
+                     if (receivers.hasPermission("helpme.see"))
+                      {
+                         //They will receive the players cry for help
+                          receivers.sendMessage(ChatColor.translateAlternateColorCodes('&', Prefix + Server + PlayerName + Arguments));
+                      }
+                      else //If the player doesn't have permission do nothing
+                     {
+                           //NOOP
+                     }
                 }
-                else //If the player doesn't have permission do nothing
-                {
-                    //NOOP
-                }
-            }
             }
             else //If they player didn't use arguments
             {
